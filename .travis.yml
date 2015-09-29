@@ -1,0 +1,10 @@
+deploy:
+  provider: s3
+  access_key_id: AKIAJA2WMFWVGAFADRGQ
+  secret_access_key:
+    secure: SWp8yl2Uun6yL0QGGkupDprqB6g/r05qHPnnqn6HkBRFUoSK7VN16tS7wIa/pD1gRDxhUDlfk+/TyML924uR0+ziQxEZwHw92yikcsLI4cYd4IgFwS1uuRjIlwHmNYcgeqMtVEAn08cgwEWWVt9c7Olmrswe/+hEilhgaXVRqUxnWv/ddrENc23ylNH0GAKo5bogX2ntT6LhWd1vQmNUW5qqP4Z6fmdgzosM3j/AQkAwaxOKOJyIhrceOhumasoe0KAx5hPVmZQdWotCw+CNvx11DwiJJ510/f5LyDcZeYCn2KU2tYkVc/aYa6KMSOCZgL2/H363X7fMk69wpRbNO87YHuQ4kf779sMxFL37ngNVbOxo9/vYprmzLt3FHaUSBdfLDX+GBIl4260xdZSithUXjSn3WuPD9k0uOo1atabs0mhblP8c7TcHY1GIFFx3JzGPErt6Vi8aRS+wq0h0MMFlzm7i2qJZ7ZwycKOv4ZwpFsXGiu+GHpNrtPQAGTWIHAQqR5CYLwwTdaaEz1F85ge6Wlb29LpJvcWNN1ln2rqib2T+HUf6ASvoa5A8ST++lvj2vb60btn8ZQuZvpYLlCi9ysUyGbC/hmZF5vhE402AlHT3Xp/7q4m9XU+eZQnHJNsa6nidgcDzgZRZpIpaGG5QwA+A6zYPSLYjSpxAtuo=
+  bucket: setup.particle.io
+  local-dir: build
+  acl: public_read
+  on:
+    repo: spark/device-setup

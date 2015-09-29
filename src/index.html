@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<title>Device Setup - Particle</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Particle Device Setup</h1>
+			<span class="help-block">Connect your Photon or Electron to the internet from your browser!</span>
+			<div id="status"></div>
+			<div id="start">
+				<div class="jumbotron">
+					<h2>Welcome!</h2>
+					<h3>Please do not refresh your browser or press the back button once the setup process has begun. If you'd like to start over, please reconnect to the internet and refresh this page to return to the first step.</h3>
+					<input id="startButton" class="btn btn-primary" type="button" value="Get Started">
+				</div>
+			</div>
+			<div id="auth" hidden>
+				<h2>1) <span>Sign Up</span></h2>
+				<form id="authForm" class="form-inline">
+					<div class="form-group">
+						<label class="sr-only" for="username">Email</label>
+						<input type="email" name="username" class="form-control" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="password">Password</label>
+						<input type="password" name="password" class="form-control" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<input class="btn btn-large btn-primary" type="button" name="authButton" id="authButton" value="Sign up">
+					</div>
+
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+							<input id="hasAccount" type="checkbox" name="existing"> I already have an account
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="connect" hidden>
+				<h2>2) Connect to Your Device</h2>
+				<div class="jumbotron">
+					<h3>Please connect to the device's Wi-Fi network (Photon-XXXX)</h3>
+				</div>
+			</div>
+			<div id="select" hidden>
+				<h2> 3) Configure Wi-Fi Connection</h2>
+				<form id="selectForm" class="form">
+					<div class="form-group">
+						<label for="networks">Detected Networks</label>
+						<select name="networks" class="form-control">
+							<option>Scanning...</option>
+						</select>
+					</div>
+					<div id="network-passphrase" class="form-group hidden">
+						<label for="password">Network Passphrase</label>
+						<input class="form-control" type="text" name="selected">
+					</div>
+					<div class="form-group">
+						<input class="btn" type="button" value="Rescan" id="rescanButton">
+						<input class="btn btn-primary" type="button" value="Configure" id="configureButton" disabled>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script src="js/DeviceSetup.js"></script>
+	</body>
+</html>
