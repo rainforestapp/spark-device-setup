@@ -9,7 +9,8 @@
     "test": "mocha test/ -R spec --compilers js:babel/register",
     "cover": "istanbul cover ./node_modules/.bin/_mocha test/ -- -R spec --compilers js:babel/register",
     "bundle": "browserify ./src -t babelify -o ./public/js/DeviceSetup.js",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "build": "gulp"
   },
   "author": "Emily Rose <nexxy@particle.io>",
   "license": "LGPL-3.0",
