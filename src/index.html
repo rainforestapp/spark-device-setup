@@ -19,25 +19,26 @@
 				</div>
 			</div>
 			<div id="auth" hidden>
-				<h2>1) <span>Sign Up</span></h2>
-				<form id="authForm" class="form-inline">
-					<div class="form-group">
+				<h2>1) <span>Create Account</span></h2>
+				<form id="authForm" class="form">
+					<div class="form-group col-md-12">
+						<div class="input-group col-md-6">
 						<label class="sr-only" for="username">Email</label>
 						<input type="email" name="username" class="form-control" placeholder="Email">
-					</div>
-					<div class="form-group">
+						</div>
+						<div class="input-group col-md-6">
 						<label class="sr-only" for="password">Password</label>
 						<input type="password" name="password" class="form-control" placeholder="Password">
+						</div>
 					</div>
-					<div class="form-group">
-						<input class="btn btn-large btn-primary" type="button" name="authButton" id="authButton" value="Sign up">
-					</div>
-
-					<div class="form-group">
+					<div class="form-group col-md-12">
 						<div class="checkbox">
 							<label>
 							<input id="hasAccount" type="checkbox" name="existing"> I already have an account
 						</div>
+					</div>
+					<div class="form-group col-md-4">
+						<input class="btn btn-large btn-primary" type="button" name="authButton" id="authButton" value="Sign up">
 					</div>
 				</form>
 			</div>
@@ -48,7 +49,7 @@
 				</div>
 			</div>
 			<div id="select" hidden>
-				<h2> 3) Configure Wi-Fi Connection</h2>
+				<h2>3) Configure Wi-Fi Connection</h2>
 				<form id="selectForm" class="form">
 					<div class="form-group">
 						<label for="networks">Detected Networks</label>
@@ -56,15 +57,22 @@
 							<option>Scanning...</option>
 						</select>
 					</div>
-					<div id="network-passphrase" class="form-group hidden">
+					<div id="network-passphrase" class="form-group" hidden>
 						<label for="password">Network Passphrase</label>
-						<input class="form-control" type="text" name="selected">
+						<input class="form-control" type="text" name="password">
 					</div>
 					<div class="form-group">
 						<input class="btn" type="button" value="Rescan" id="rescanButton">
 						<input class="btn btn-primary" type="button" value="Configure" id="configureButton" disabled>
 					</div>
 				</form>
+			</div>
+			<div id="done" hidden>
+				<div class="jumbotron">
+					<h2>Congratulations!</h2>
+					<h3>You have successfully configured your device! It should automatically connect to the internet shortly. You can now reconnect to the internet as well. Now go build something!</h3>
+					<input id="buildButton" class="btn btn-primary" type="button" value="Go Build">
+				</div>
 			</div>
 		</div>
 		<script src="js/DeviceSetup.js"></script>

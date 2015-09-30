@@ -1,26 +1,10 @@
 import DeviceSetup from './DeviceSetup';
-// import React from 'react';
+
 let state = 0;
+let ssid = '';
 const setup = new DeviceSetup();
 const $ = require('jquery');
-
 $(() => {
-
-	// toggle signup/login
-	$('#hasAccount').change(() => {
-		if ($('#hasAccount').is(':checked')) {
-			$('#auth span').html('Log In');
-			$('#authButton').attr('value', 'Login');
-		}
-		else {
-			$('#auth span').html('Sign Up');
-			$('#authButton').attr('value', 'Signup');
-		}
-	});
-	$('#startButton').click(() => {
-		$('#start').hide();
-		$('#auth').show();
-	});
 	// state 2
 	// Now selecting from available Wi-Fi networks
 	function scan() {
@@ -33,23 +17,76 @@ $(() => {
 				$option.text(network.ssid);
 				$option.appendTo($select);
 			});
-			$select.change(() => {
-				const $network = $('#selectForm select option:selected');
-				const $confButton = $('#configureButton');
-				if (!$network) { return $confButton.prop('disabled', true); }
-				$confButton.prop('disabled', false);
-			});
+			setup.publicKey();
 		}).catch(() => {
 			// TODO: Recovery
 			setTimeout(scan, 2000);
 		});
 	}
+	function done() {
+		$('#select').hide();
+		$('#done').show();
+	}
+	// toggle signup/login labels
+	$('#hasAccount').change(() => {
+		if ($('#hasAccount').is(':checked')) {
+			$('#auth span').html('Account Details');
+			$('#authButton').attr('value', 'Log In');
+		}
+		else {
+			$('#auth span').html('Create Account');
+			$('#authButton').attr('value', 'Sign Up');
+		}
+	});
 
-	// state 1
+	// configure Wi-Fi network button
+	$('#selectForm select').change(() => {
+		const network = $('#selectForm select option:selected').html();
+		const $confButton = $('#configureButton');
+		if (!network) { return $confButton.prop('disabled', true); }
+		$confButton.prop('disabled', false);
+		ssid = network;
+		if (setup.needsPassword(network)) {
+			$('#network-passphrase').show();
+		}
+	});
+
+	// go to build.particle.io
+	$('#buildButton').click(() => {
+		window.location.href = 'https://build.particle.io/';
+	});
+
+	$('#configureButton').click(() => {
+		if (!ssid) { return; }
+		if (!setup.needsPassword(ssid)) {
+			configure();
+			return;
+		}
+		const password = $('#network-passphrase input').val();
+		const config = setup.getNetwork(ssid);
+		config.password = password;
+		setup.configure(config).then((results) => {
+			setup.connect().then((results) => {
+				done();
+			});
+		}).catch((error) => {
+			console.log(error);
+		});
+	});
+
+	// 'Get Started' button
+	$('#startButton').click(() => {
+		$('#start').hide();
+		$('#auth').show();
+	});
+
+	// rescan for Wi-Fi networks
+	$('#rescanButton').click(scan);
+
+	// state 1 -> 2
 	// Now probing for connection to Photon
 	const interval = setInterval(() => {
 		if (state !== 1) { return; }
-		console.log('probing...');
 		setup.deviceInfo().then(() => {
 			state = 2;
 			clearInterval(interval);
@@ -62,7 +99,7 @@ $(() => {
 		});
 	}, 5000);
 
-	// state 0
+	// state 0 -> 1
 	// Clicked on login/signup button
 	$('#authButton').click(() => {
 		const data = { };
@@ -70,8 +107,7 @@ $(() => {
 		const method = $('#hasAccount').is(':checked') ? 'login' : 'signup';
 		form.forEach((object) => { data[object.name] = object.value; });
 		setup[method](data).then(() => {
-			// TODO: Transition/spinner while doing this.
-
+			// TODO: Transition/spinner while doing this; it can lag a bit.
 			setup.getClaimCode().then(() => {
 				state = 1;
 				$('#auth').hide();
