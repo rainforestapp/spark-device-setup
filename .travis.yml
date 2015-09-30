@@ -14,5 +14,6 @@ deploy:
   bucket: setup.particle.io
   local_dir: public
   acl: public_read
+  skip_cleanup: true
   on:
     repo: spark/device-setup

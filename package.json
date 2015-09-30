@@ -5,11 +5,11 @@
   "main": "src/DeviceSetup.js",
   "scripts": {
     "prepublish": "npm run lint && npm run compile",
-    "compile": "./node_modules/.bin/babel --optional runtime -sd lib/ src/",
-    "test": "./node_modules/.bin/mocha test/ -R spec --compilers js:babel/register",
-    "cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test/ -- -R spec --compilers js:babel/register",
-    "bundle": "./node_modules/.bin/browserify ./src -t babelify -o ./public/js/DeviceSetup.js",
-    "lint": "./node_modules/.bin/eslint src/"
+    "compile": "babel --optional runtime -sd lib/ src/",
+    "test": "mocha test/ -R spec --compilers js:babel/register",
+    "cover": "istanbul cover ./node_modules/.bin/_mocha test/ -- -R spec --compilers js:babel/register",
+    "bundle": "browserify ./src -t babelify -o ./public/js/DeviceSetup.js",
+    "lint": "eslint src/"
   },
   "author": "Emily Rose <nexxy@particle.io>",
   "license": "LGPL-3.0",
