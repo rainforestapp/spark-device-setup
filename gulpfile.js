@@ -34,4 +34,4 @@ gulp.task('watch', () => {
 	gulp.watch('./src/*.html', [ 'html' ]);
 });
 
-gulp.task('default', [ 'js', 'html', 'connect', 'watch']);
+gulp.task('default', [ 'js', 'html' ]);
