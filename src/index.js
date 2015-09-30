@@ -65,8 +65,8 @@ $(() => {
 		const password = $('#network-passphrase input').val();
 		const config = setup.getNetwork(ssid);
 		config.password = password;
-		setup.configure(config).then((results) => {
-			setup.connect().then((results) => {
+		setup.configure(config).then(() => {
+			setup.connect().then(() => {
 				done();
 			});
 		}).catch((error) => {
